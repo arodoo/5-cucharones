@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    container: {
-        marginHorizontal: 30
+    content: {
+        marginRight: 40,
+        marginLeft: 40,
     },
     img: {
         resizeMode: 'contain',
         height: 300,
         width: '100%',
         marginBottom: 40,
+        marginTop: 20,
     },
     title: {
         fontWeight: 'bold',
@@ -20,14 +22,14 @@ export const styles = StyleSheet.create({
         marginBottom: 20,
         textAlign: 'center',
     },
-    viewBtn: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    btnStyle: {
-        backgroundColor: '#00a680',
-    },
+
     btnContainer: {
         width: '70%',
+        backgroundColor: '#233142',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginLeft: 50,
+        marginRight: 50,
+        
     },
     });

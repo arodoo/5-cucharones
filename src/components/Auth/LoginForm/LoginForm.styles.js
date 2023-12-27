@@ -1,14 +1,9 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    image: {
-        resizeMode: 'contain',
-        width: '100%',
-        height: 150,
-        marginTop: 20,
-    },
     content: {
         marginRight: 40,
+        marginLeft: 40,
     },
     textRegister: {
         marginTop: 15,
@@ -17,7 +12,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     btnRegister: {
-        color: '#233142',
+        backgroundColor: '#233142',
         fontWeight: 'bold',
         textAlign: 'center',
     },

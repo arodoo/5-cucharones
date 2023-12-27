@@ -1,22 +1,23 @@
 import { View } from 'react-native'
 import React, { useState } from 'react'
-import { Input, Icon, Button } from '@rneui/base'
-import { useFormik } from 'formik'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { Button, Input, Icon } from '@rneui/base'
+import { initialValues, validationSchema } from './LoginForm.data';
+import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/native'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import Toast from 'react-native-toast-message'
-import { initialValues, validationSchema } from "./RegisterForm.data"
-import { screen } from "../../../utils"
-import { styles } from './RegisterForm.styles'
+import { screen } from '../../../utils'
+import { styles } from './LoginForm.styles'
 
+export function LoginForm() {
 
-export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
-  const navigation = useNavigation();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
   }
+
+  const navigation = useNavigation();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -25,7 +26,7 @@ export function RegisterForm() {
     onSubmit: async (formValue) => {
       try {
         const auth = getAuth()
-        await createUserWithEmailAndPassword(
+        await signInWithEmailAndPassword(
           auth,
           formValue.email,
           formValue.password
@@ -35,23 +36,22 @@ export function RegisterForm() {
         Toast.show({
           type: 'error',
           position: 'bottom',
-          text1: 'Error al registrar el usuario',
+          text1: 'Error al iniciar sesión',
         })
-        console.log(error)
       }
     }
   })
 
+
   return (
-    <View style={styles.container}>
+    <View style={styles.content}>
       <Input
-        style={styles.input}
-        label="Email"
-        placeholder="Email"
+        placeholder="Correo electrónico"
+        containerStyle={styles.input}
         rightIcon={
           <Icon
-            type='material-community'
-            name='at'
+            type="material-community"
+            name="at"
             iconStyle={styles.icon}
           />
         }
@@ -59,41 +59,24 @@ export function RegisterForm() {
         errorMessage={formik.errors.email}
       />
       <Input
-        style={styles.input}
-        label="Contraseña"
         placeholder="Contraseña"
+        containerStyle={styles.input}
+        password={true}
         secureTextEntry={!showPassword}
         rightIcon={
           <Icon
-            type='material-community'
+            type="material-community"
             name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            iconStyle={styles.icon}
             onPress={handleShowPassword}
+            iconStyle={styles.icon}
           />
         }
         onChangeText={(text) => formik.setFieldValue('password', text)}
         errorMessage={formik.errors.password}
       />
-      <Input
-        style={styles.input}
-        label="Repetir contraseña"
-        placeholder="Repetir contraseña"
-        secureTextEntry={!showPassword}
-        rightIcon={
-          <Icon
-            type='material-community'
-            name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            iconStyle={styles.icon}
-            onPress={handleShowPassword}
-          />
-        }
-        onChangeText={(text) => formik.setFieldValue('repeatPassword', text)}
-        errorMessage={formik.errors.repeatPassword}
-      />
       <Button
-        title="Registrarse"
-        containerStyle={styles.btnContainer}
-        buttonStyle={styles.btn}
+        title={"Iniciar sesión"}
+        buttonStyle={styles.btnRegister}
         onPress={formik.handleSubmit}
         loading={formik.isSubmitting}
       />

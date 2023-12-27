@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import {Text, Image} from "@rneui/base";
+import { Text, Image } from "@rneui/base";
 import { styles } from './LoginScreen.styles'
 import { screen } from "../../../utils";
+import { LoginForm } from "../../../components/Auth";
 import { useNavigation } from "@react-navigation/native";
+
 export function LoginScreen() {
   const navigation = useNavigation();
 
@@ -13,18 +15,24 @@ export function LoginScreen() {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.logoContainer}>
+      <View>
+        <View>
           <Image
             source={require("../../../../assets/img/restaurant-logo.png")}
             style={styles.image}
           />
         </View>
-        <View style={styles.formContainer}>
-          <Text>Login</Text>
+        <View >
+          <LoginForm />
         </View>
-        <View style={styles.registerContainer}>
-          <Text onPress={goToRegister}>Register</Text>
+        <View >
+          <Text style={styles.textRegister}>¿Aún no te has registrado?</Text>
+          <Text
+            style={styles.btnRegister}
+            onPress={goToRegister}
+          >
+            Regístrate
+          </Text>
         </View>
       </View>
     </ScrollView>
