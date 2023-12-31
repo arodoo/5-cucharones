@@ -2,7 +2,7 @@ import { Text } from 'react-native';
 import React from 'react';
 import {View, ActivityIndicator } from "react-native";
 import {styles} from "./LoadingModal.styles";
-import { Overlay } from '@rneui/base';
+import { Overlay } from 'react-native-elements';
 
 export function LoadingModal(props) {
     const {show, text} = props;

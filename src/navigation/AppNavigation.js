@@ -9,7 +9,7 @@ import { AccountStack } from "./AccountStack";
 import { screen } from "../utils/index";
 
 
-import { Icon } from "@rneui/themed";
+import { Icon } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
 

@@ -1,6 +1,6 @@
 import { View } from 'react-native'
 import React, { useState } from 'react'
-import { Input, Icon, Button } from '@rneui/base'
+import { Input, Icon, Button } from 'react-native-elements'
 import { useFormik } from 'formik'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { useNavigation } from '@react-navigation/native'

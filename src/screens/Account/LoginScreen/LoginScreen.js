@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import { Text, Image } from "@rneui/base";
+import { Text, Image } from "react-native-elements";
 import { styles } from './LoginScreen.styles'
 import { screen } from "../../../utils";
 import { LoginForm } from "../../../components/Auth";

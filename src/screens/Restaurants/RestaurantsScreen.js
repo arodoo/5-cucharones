@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Button } from "@rneui/base"; 
+import { Button } from "react-native-elements"; 
 import {screen} from "../../utils";
 
 export function RestaurantsScreen(props) {

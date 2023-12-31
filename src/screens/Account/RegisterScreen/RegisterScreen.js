@@ -1,6 +1,6 @@
 import { View} from 'react-native';
 import React from 'react';
-import { Image } from '@rneui/base';
+import { Image } from 'react-native-elements';
 import { RegisterForm } from '../../../components/Auth';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view"
 import { styles } from './RegisterScreen.styles';

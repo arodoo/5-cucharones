@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Alert } from "react-native";
-import { Avatar, Text } from "@rneui/base";
+import { Avatar, Text } from "react-native-elements";
 import Toast from 'react-native-toast-message';
 import { getAuth, updateProfile } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";

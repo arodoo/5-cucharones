@@ -1,6 +1,6 @@
 import { View } from 'react-native'
 import React, { useState } from 'react'
-import { Button, Input, Icon } from '@rneui/base'
+import { Button, Input, Icon } from 'react-native-elements'
 import { initialValues, validationSchema } from './LoginForm.data';
 import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/native'
