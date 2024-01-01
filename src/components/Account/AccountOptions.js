@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { Icon, ListItem, Text } from 'react-native-elements'
 import map from 'lodash/map'
 import { Modal } from '../Shared/Modal/Modal'
+import { ChangueDisplayNameForm } from '../Account/ChangueDisplayNameForm'
 
 export function AccountOptions() {
 
@@ -12,10 +13,9 @@ export function AccountOptions() {
   const onCloseOpenModal = () => setShowModal(!showModal)
 
   const selectedComponent = (key) => {
-    console.log(key);
     // Add your logic here based on the selected component key
     if (key === "displayName") {
-      setRenderComponent(<Text>displayName</Text>)
+      setRenderComponent(<ChangueDisplayNameForm onClose={onCloseOpenModal}/>)
     } else if (key === "email") {
       setRenderComponent(<Text>email</Text>)
     } else if (key === "password") {
