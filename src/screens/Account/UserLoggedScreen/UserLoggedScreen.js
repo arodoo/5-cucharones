@@ -10,6 +10,9 @@ export function UserLoggedScreen() {
 
   const [loading, setLoading] = useState(false)
   const [loadingText, setLoadingText] = useState("")
+  const [_, setReload] = useState(false)
+
+  const onReload = () => setReload((prevState) => !prevState)
 
   const logout = async () => {
     await signOut(getAuth())
@@ -18,7 +21,7 @@ export function UserLoggedScreen() {
   return (
     <View>
       <InfoUser setLoading={setLoading} setLoadingText={setLoadingText} />
-      <AccountOptions></AccountOptions>
+      <AccountOptions onReload={onReload}></AccountOptions>
       <Button
         title={'Cerrar sesión'}
         buttonStyle={styles.button}
