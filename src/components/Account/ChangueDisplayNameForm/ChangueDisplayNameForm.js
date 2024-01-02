@@ -22,9 +22,7 @@ export function ChangueDisplayNameForm(props) {
         const currentUser = getAuth().currentUser;
         await updateProfile(currentUser, {displayName}).finally(() => {
           onReload();
-          console.log("onReload");
-          onCloseOpenModal();
-          console.log("onClose");
+          onCloseOpenModal(false);
         })
         /* await updateProfile(getAuth().currentUser, {displayName}) */
         Toast.show({

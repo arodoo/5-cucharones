@@ -12,7 +12,11 @@ export function AccountOptions(props) {
   const [showModal, setShowModal] = useState(false)
   const [renderComponent, setRenderComponent] = useState(null)
 
-  const onCloseOpenModal = () => setShowModal(!showModal)
+  const onCloseOpenModal = (state) => (
+
+    setShowModal(state),
+    console.log("state", state)
+  )
 
   const selectedComponent = (key) => {
     // Add your logic here based on the selected component key
@@ -22,12 +26,14 @@ export function AccountOptions(props) {
           onCloseOpenModal={onCloseOpenModal}
           onReload={onReload}
         />)
+      onCloseOpenModal(true)
     } else if (key === "email") {
       setRenderComponent(<Text>email</Text>)
+      onCloseOpenModal(true)
     } else if (key === "password") {
       setRenderComponent(<Text>password</Text>)
+      onCloseOpenModal(true)
     }
-    onCloseOpenModal();
   }
 
 
