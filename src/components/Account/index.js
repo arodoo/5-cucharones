@@ -1,3 +1,4 @@
 export * from './InfoUser'
 export * from './AccountOptions'
-export * from './ChangueDisplayNameForm'
+export * from './ChangeDisplayNameForm'
+export * from './ChangePersonalEmailForm'

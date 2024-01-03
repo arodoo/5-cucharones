@@ -2,11 +2,12 @@ import { View } from 'react-native'
 import React, { useState } from 'react'
 import { Button, Input, Icon } from 'react-native-elements'
 import { initialValues, validationSchema } from './LoginForm.data';
-import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/native'
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
-import Toast from 'react-native-toast-message'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../../utils/firebase'
 import { screen } from '../../../utils'
+import Toast from 'react-native-toast-message'
+import { useFormik } from 'formik';
 import { styles } from './LoginForm.styles'
 
 export function LoginForm() {
@@ -25,7 +26,7 @@ export function LoginForm() {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        const auth = getAuth()
+        //const authInstance = auth()
         await signInWithEmailAndPassword(
           auth,
           formValue.email,
@@ -33,6 +34,7 @@ export function LoginForm() {
         );
         navigation.navigate(screen.account.account)
       } catch (error) {
+        console.log(error)
         Toast.show({
           type: 'error',
           position: 'bottom',

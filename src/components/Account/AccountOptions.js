@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import { Icon, ListItem, Text } from 'react-native-elements'
 import map from 'lodash/map'
 import { Modal } from '../Shared/Modal/Modal'
-import { ChangueDisplayNameForm } from '../Account/ChangueDisplayNameForm'
+import { ChangueDisplayNameForm } from './ChangeDisplayNameForm'
+import { ChangePersonalEmailForm } from './ChangePersonalEmailForm'
 
 export function AccountOptions(props) {
 
@@ -14,8 +15,8 @@ export function AccountOptions(props) {
 
   const onCloseOpenModal = (state) => (
 
-    setShowModal(state),
-    console.log("state", state)
+    setShowModal(state)
+    //console.log("state", state)
   )
 
   const selectedComponent = (key) => {
