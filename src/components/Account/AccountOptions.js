@@ -29,7 +29,12 @@ export function AccountOptions(props) {
         />)
       onCloseOpenModal(true)
     } else if (key === "email") {
-      setRenderComponent(<Text>email</Text>)
+      setRenderComponent(
+        <ChangePersonalEmailForm
+          onClose={onCloseOpenModal}
+          onReload={onReload}
+        />
+      )
       onCloseOpenModal(true)
     } else if (key === "password") {
       setRenderComponent(<Text>password</Text>)
