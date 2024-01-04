@@ -13,9 +13,10 @@ export default function App() {
     <>
       <NavigationContainer>
         <AppNavigation />
+        <Toast></Toast>
       </NavigationContainer>
 
-      <Toast></Toast>
+
     </>
   );
 }
