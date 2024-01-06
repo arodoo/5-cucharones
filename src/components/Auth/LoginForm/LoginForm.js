@@ -26,19 +26,32 @@ export function LoginForm() {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        //const authInstance = auth()
         await signInWithEmailAndPassword(
           auth,
           formValue.email,
           formValue.password
-        );
-        navigation.navigate(screen.account.account)
+        ).then((userCredentials) => {
+          const user = userCredentials.user
+          Toast.show({
+            type: 'success',
+            text1: 'Bienvenido',
+            text2: user.email,
+            visibilityTime: 3000,
+            autoHide: true,
+            topOffset: 30,
+            bottomOffset: 40,
+          })
+          navigation.navigate(screen.account.account)
+        })
       } catch (error) {
-        console.log(error)
         Toast.show({
           type: 'error',
-          position: 'bottom',
-          text1: 'Error al iniciar sesión',
+          text1: 'Error',
+          text2: error.message,
+          visibilityTime: 3000,
+          autoHide: true,
+          topOffset: 30,
+          bottomOffset: 40,
         })
       }
     }

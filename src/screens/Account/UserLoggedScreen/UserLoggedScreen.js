@@ -5,6 +5,7 @@ import { InfoUser,AccountOptions } from '../../../components/Account'
 import {LoadingModal} from "../../../components"
 import { getAuth, signOut } from 'firebase/auth'
 import { styles } from './UserLoggedScreen.styles'
+import Toast from 'react-native-toast-message'
 
 export function UserLoggedScreen() {
 
@@ -15,7 +16,23 @@ export function UserLoggedScreen() {
   const onReload = () => setReload((prevState) => !prevState)
 
   const logout = async () => {
-    await signOut(getAuth())
+    try {
+      setLoading(true)
+      setLoadingText("Cerrando sesión")
+      await signOut(getAuth())
+      setLoading(false)
+      Toast.show({
+        type: 'success',
+        text1: 'Sesión cerrada',
+        text2: 'Vuelve pronto',
+        visibilityTime: 3000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   return (
