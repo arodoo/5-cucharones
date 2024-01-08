@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Button } from 'react-native-elements'
-import {InfoForm} from '../../../components/AddRestaurant'
+import {InfoForm} from '../../../components/Restaurants/AddRestaurant'
 import { useFormik } from 'formik'
 import { initialValues, validationSchema } from './AddRestaurantScreen.data'
 import { styles } from './AddRestaurantScreen.styles'
