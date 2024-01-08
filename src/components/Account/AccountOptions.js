@@ -5,6 +5,7 @@ import map from 'lodash/map'
 import { Modal } from '../Shared/Modal/Modal'
 import { ChangueDisplayNameForm } from './ChangeDisplayNameForm'
 import { ChangePersonalEmailForm } from './ChangePersonalEmailForm'
+import { ChanguePersonalPasswordForm } from './ChanguePersonalPasswordForm'
 
 export function AccountOptions(props) {
 
@@ -37,7 +38,11 @@ export function AccountOptions(props) {
       )
       onCloseOpenModal(true)
     } else if (key === "password") {
-      setRenderComponent(<Text>password</Text>)
+      setRenderComponent(
+        <ChanguePersonalPasswordForm
+          onClose={onCloseOpenModal}
+        />
+      )
       onCloseOpenModal(true)
     }
   }
