@@ -16,5 +16,9 @@ export const styles = StyleSheet.create({
     label: {
         marginBottom: 10,
     },
+    mapStyle: {
+        width: "100%",
+        height: 550,
+    },
     });
     
