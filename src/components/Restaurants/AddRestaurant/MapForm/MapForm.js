@@ -47,7 +47,7 @@ export function MapForm(props) {
           initialRegion={location}
           showsUserLocation={true}
           style={styles.mapStyle}
-          //onRegionChange={(region) => setLocation(region)}
+          onRegionChange={(region) => setLocation(region)}
         >
         
             <Marker
