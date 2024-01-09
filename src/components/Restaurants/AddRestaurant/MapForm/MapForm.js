@@ -9,7 +9,7 @@ import { styles } from './MapForm.styles'
 
 export function MapForm(props) {
 
-  const { show, close, formik } = props
+  const { show, close, formik, setIconColor  } = props
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -43,6 +43,12 @@ export function MapForm(props) {
 
   const saveLocation = () => {
     formik.setFieldValue('location', location)
+    setIconColor('#00ff00')
+    close()
+  }
+
+  closeMap = () => {
+    //setColorIconMap(formik)
     close()
   }
 
@@ -81,8 +87,9 @@ export function MapForm(props) {
         <Button
           title="Cerrar"
           onPress={() => {
-            props.close()
+            closeMap()
           }}
+          
           containerStyle={styles.btnMapContainerCancel}
           buttonStyle={styles.btnMapCancel}
         />

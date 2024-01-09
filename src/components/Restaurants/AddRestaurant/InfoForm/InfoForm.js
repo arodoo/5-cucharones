@@ -1,16 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, forwardRef, useImperativeHandle} from 'react'
 import { View, Text } from 'react-native'
 import { Input } from 'react-native-elements'
 import { MapForm } from '../MapForm'
 import { styles } from './InfoForm.styles'
 
 
-export function InfoForm(props) {
+ function InfoForm(props, ref) {
 
   const [showMap, setShowMap] = useState(false)
   const { formik } = props
-
+  const [iconColor, setIconColor] = useState('#c2c2c2')
   const onOpenCloseMap = () => { setShowMap(!showMap) }
+
+  useImperativeHandle(ref, () => ({
+    getColorIconMap() {
+      if (formik.errors.location) {
+        setIconColor('#ff0000')
+        console.log(iconColor)
+      } else if (formik.values.location.latitude !== 0) {
+        setIconColor('#00ff00')
+        console.log(iconColor)
+      } else {
+        setIconColor('#c2c2c2')
+        console.log(iconColor)
+      }
+    }
+  }));
+
 
   return (
     <>
@@ -23,7 +39,7 @@ export function InfoForm(props) {
         rightIcon={{
           type: 'material-symbols-outline',
           name: 'location-pin',
-          color: '#c2c2c2',
+          color: iconColor,
           size: 40,
           onPress: onOpenCloseMap
         }}
@@ -47,7 +63,13 @@ export function InfoForm(props) {
       />
     </View>
 
-      <MapForm show={showMap} close={onOpenCloseMap} formik={formik}/>
+      <MapForm show={showMap}
+       close={onOpenCloseMap}
+        formik={formik}
+        setIconColor={setIconColor}
+        />
     </>
   )
 }
+
+export default forwardRef(InfoForm)

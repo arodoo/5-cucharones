@@ -7,12 +7,7 @@ export function initialValues() {
     phone: '',
     email: '',
     description: '',
-    location: {
-      latitude: 0,
-      longitude: 0,
-      latitudeDelta: 0,
-      longitudeDelta: 0
-    },
+    location: null
   };
 }
 
