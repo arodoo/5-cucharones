@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import InfoForm from '../../../components/Restaurants/AddRestaurant/InfoForm/InfoForm'
 import { UploadImagesForm } from '../../../components/Restaurants/AddRestaurant'
@@ -35,7 +35,7 @@ export function AddRestaurantScreen() {
   })
 
   return (
-    <View>
+    <ScrollView>
       <InfoForm formik={formik} ref={infoFormRef} />
       <UploadImagesForm formik={formik} />
       <Button
@@ -44,6 +44,6 @@ export function AddRestaurantScreen() {
         onPress={handleSubmit}
        // loading={formik.isSubmitting}
       />
-    </View>
+    </ScrollView>
   )
 }

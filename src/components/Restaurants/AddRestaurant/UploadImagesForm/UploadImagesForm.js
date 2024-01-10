@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View } from 'react-native'
 import { Image, Icon, Avatar, Text } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
@@ -8,10 +8,12 @@ import {
     uploadBytes,
     getDownloadURL
 } from 'firebase/storage'
+import { LoadingModal } from '../../../Shared'
 import { styles } from './UploadImagesForm.styles'
 
 export function UploadImagesForm(props) {
     const { formik } = props
+    const [isLoading, setIsLoading] = useState(false)
 
     const openGallery = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -22,7 +24,8 @@ export function UploadImagesForm(props) {
 
         })
         if (!result.canceled) {
-            const asset  = result.assets[0]
+            setIsLoading(true)
+            const asset = result.assets[0]
             const uri = asset.uri
             uploadImage(uri)
         }
@@ -36,9 +39,18 @@ export function UploadImagesForm(props) {
         const imageRef = ref(storage, `restaurants/${formik.values.name}-${Date.now()}`)
 
         uploadBytes(imageRef, blob).then(async (snapshot) => {
-            console.log(snapshot)
+            updatePhotosRestaurant(snapshot.metadata.fullPath)
         })
+        setIsLoading(false)
     };
+
+    const updatePhotosRestaurant = async (imagePath) => {
+        const storage = getStorage()
+        const imageRef = ref(storage, imagePath)
+        await getDownloadURL(imageRef).then((url) => {
+            formik.setFieldValue('images', [...formik.values.images, url])
+        })
+    }
 
     return (
         <>
@@ -50,7 +62,10 @@ export function UploadImagesForm(props) {
                     containerStyle={styles.containerIcon}
                     onPress={openGallery}
                 />
+                <Text style={styles.textImage}>Añade fotos del restaurante</Text>
             </View>
+            <Text style={styles.error}>{formik.errors.images}</Text>
+            <LoadingModal show={isLoading} text="Subiendo imagen" />
         </>
     )
 }

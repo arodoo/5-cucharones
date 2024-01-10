@@ -19,4 +19,9 @@ export const styles = StyleSheet.create({
         width: 70,
         backgroundColor: "#e3e3e3",
     },
+    error: {
+        color: "#f00",
+        marginLeft: 10,
+        marginTop: 10,
+    },
     });
