@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import { Image, Icon, Avatar, Text } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
+import { map } from 'lodash';
 import {
     getStorage,
     ref,
@@ -44,6 +45,8 @@ export function UploadImagesForm(props) {
         setIsLoading(false)
     };
 
+
+
     const updatePhotosRestaurant = async (imagePath) => {
         const storage = getStorage()
         const imageRef = ref(storage, imagePath)
@@ -62,6 +65,13 @@ export function UploadImagesForm(props) {
                     containerStyle={styles.containerIcon}
                     onPress={openGallery}
                 />
+                {map(formik.values.images, (imageRestaurant, index) => (
+                    <Avatar
+                        key={index}
+                        source={{ uri: imageRestaurant }}
+                        style={styles.imageStyle}
+                    />
+                ))}
                 <Text style={styles.textImage}>Añade fotos del restaurante</Text>
             </View>
             <Text style={styles.error}>{formik.errors.images}</Text>

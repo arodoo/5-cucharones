@@ -24,4 +24,9 @@ export const styles = StyleSheet.create({
         marginLeft: 10,
         marginTop: 10,
     },
+    imageStyle: {
+        width: 70,
+        height: 70,
+        marginRight: 10,
+    },
     });
