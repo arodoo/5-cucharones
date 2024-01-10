@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Image, Icon, Avatar, Text } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
 import { map } from 'lodash';
@@ -57,7 +57,7 @@ export function UploadImagesForm(props) {
 
     return (
         <>
-            <View style={styles.viewImage}>
+            <ScrollView style={styles.viewImage} horizontal>
                 <Icon
                     type="material"
                     name="photo"
@@ -73,7 +73,7 @@ export function UploadImagesForm(props) {
                     />
                 ))}
                 <Text style={styles.textImage}>Añade fotos del restaurante</Text>
-            </View>
+            </ScrollView>
             <Text style={styles.error}>{formik.errors.images}</Text>
             <LoadingModal show={isLoading} text="Subiendo imagen" />
         </>
