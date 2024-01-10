@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Alert } from 'react-native'
 import { Image, Icon, Avatar, Text } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
 import { map } from 'lodash';
@@ -55,6 +55,31 @@ export function UploadImagesForm(props) {
         })
     }
 
+    const removeImage = (image) => {
+        Alert.alert(
+            "Eliminar imagen",
+            "¿Estás seguro de que quieres eliminar la imagen?",
+            [
+                {
+                    text: "No",
+                    style: "cancel"
+                },
+                {
+                    text: "Sí",
+                    onPress: () => {
+                        formik.setFieldValue(
+                            "images",
+                            formik.values.images.filter(
+                                (imageUrl) => imageUrl !== image
+                            )
+                        )
+                    }
+                }
+            ],
+            { cancelable: false }
+        )
+    }
+
     return (
         <>
             <ScrollView style={styles.viewImage} horizontal>
@@ -70,6 +95,7 @@ export function UploadImagesForm(props) {
                         key={index}
                         source={{ uri: imageRestaurant }}
                         style={styles.imageStyle}
+                        onPress={() => removeImage(imageRestaurant)}
                     />
                 ))}
                 <Text style={styles.textImage}>Añade fotos del restaurante</Text>
