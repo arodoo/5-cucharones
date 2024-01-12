@@ -2,14 +2,16 @@ import React, {useState, useEffect} from "react";
 import { View} from "react-native";
 import { Icon } from "react-native-elements"; 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
 import Toast from "react-native-toast-message";
-import {screen} from "../../../utils";
+import {screen, db} from "../../../utils";
 import { styles } from "./RestaurantsScreen.styles";
 
 export function RestaurantsScreen(props) {
 
     const { navigation } = props;
     const [currentUser, setCurrentUser] = useState(null)
+    const [restaurants, setRestaurants] = useState(null)
 
     useEffect(() => {
         const auth = getAuth();
@@ -17,6 +19,22 @@ export function RestaurantsScreen(props) {
             user ? setCurrentUser(true) : setCurrentUser(false);
         });
     }, []);
+
+    useEffect(() => {
+        const q = query(
+            collection(db, "restaurants"),
+            orderBy("createdAt", "desc")
+            );
+        onSnapshot(q, (querySnapshot) => {
+            setRestaurants(querySnapshot.docs)
+            console.log("Total de restaurantes: ", querySnapshot.size);
+            querySnapshot.forEach((doc) => {
+                console.log("Datos del restaurante: ", doc.data());
+            });
+        });
+    }, []);
+
+
 
 
 
