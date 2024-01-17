@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { View} from "react-native";
-import { Icon } from "react-native-elements"; 
+import { Icon, Text } from "react-native-elements"; 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
 import Toast from "react-native-toast-message";
 import {screen, db} from "../../../utils";
+import { LoadingModal } from "../../../components/Shared";
 import { styles } from "./RestaurantsScreen.styles";
 
 export function RestaurantsScreen(props) {
@@ -55,6 +56,13 @@ export function RestaurantsScreen(props) {
     };
     return (
         <View style={styles.container}>
+            {!restaurants ? (
+                <LoadingModal show text="Espere un momento, estamos trabajando duro por usted" />
+            ) : (
+                <Text>Lista de restaurantes</Text>
+            )}
+            
+
             <Icon
                 type="material"
                 name="add"
