@@ -6,6 +6,7 @@ import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
 import Toast from "react-native-toast-message";
 import {screen, db} from "../../../utils";
 import { LoadingModal } from "../../../components/Shared";
+import { ListRestaurants } from "../../../components/Restaurants/ListRestaurants/ListRestaurants";
 import { styles } from "./RestaurantsScreen.styles";
 
 export function RestaurantsScreen(props) {
@@ -35,11 +36,6 @@ export function RestaurantsScreen(props) {
         });
     }, []);
 
-
-
-
-
-
     const goToAddRestaurant = () => {
         if(!currentUser){
             Toast.show({
@@ -59,7 +55,7 @@ export function RestaurantsScreen(props) {
             {!restaurants ? (
                 <LoadingModal show text="Espere un momento, estamos trabajando duro por usted" />
             ) : (
-                <Text>Lista de restaurantes</Text>
+                <ListRestaurants restaurants={restaurants} />
             )}
             
 
