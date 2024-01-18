@@ -17,7 +17,7 @@ export function AccountOptions(props) {
   const onCloseOpenModal = (state) => (
 
     setShowModal(state)
-    //console.log("state", state)
+
   )
 
   const selectedComponent = (key) => {

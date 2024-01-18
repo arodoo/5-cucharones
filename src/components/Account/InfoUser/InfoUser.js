@@ -41,7 +41,6 @@ export function InfoUser(props) {
             aspect: [4, 4],
         });
         if (!result.canceled) {
-            //console.log("URI:", result.assets[0].uri);
             uploadImage(result.assets[0].uri, storage);
         }
     };

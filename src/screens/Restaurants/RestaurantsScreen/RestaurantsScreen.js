@@ -29,12 +29,11 @@ export function RestaurantsScreen(props) {
             );
         onSnapshot(q, (querySnapshot) => {
             setRestaurants(querySnapshot.docs)
-            console.log("Total de restaurantes: ", querySnapshot.size);
-            querySnapshot.forEach((doc) => {
-                console.log("Datos del restaurante: ", doc.data());
-            });
-        });
-    }, []);
+        }
+        );
+    }
+    , []);
+
 
     const goToAddRestaurant = () => {
         if(!currentUser){

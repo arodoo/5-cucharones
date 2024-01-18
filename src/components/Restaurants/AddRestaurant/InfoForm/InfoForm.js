@@ -16,13 +16,10 @@ import { styles } from './InfoForm.styles'
     getColorIconMap() {
       if (formik.errors.location) {
         setIconColor('#ff0000')
-        console.log(iconColor)
       } else if (formik.values.location.latitude !== 0) {
         setIconColor('#00ff00')
-        console.log(iconColor)
       } else {
         setIconColor('#c2c2c2')
-        console.log(iconColor)
       }
     }
   }));
