@@ -4,7 +4,8 @@ export const styles = StyleSheet.create({
     content: {
         position: 'relative',
         width: '100%',
-        height: '100%',
+        flex: 1,
+        
     },
     containerPagination: {
         backgroundColor: 'transparent',
