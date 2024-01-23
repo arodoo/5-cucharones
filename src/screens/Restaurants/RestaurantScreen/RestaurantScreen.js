@@ -8,7 +8,7 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore'
-import { Carousel } from '../../../components/Shared'
+import { Carousel, Loading } from '../../../components/Shared'
 import { db } from '../../../utils'
 import { styles } from './RestaurantScreen.styles'
 export function RestaurantScreen(props) {
@@ -27,7 +27,7 @@ export function RestaurantScreen(props) {
     , [route.params.id])
 
   if (!restaurant) {
-    return null
+    return <Loading show text='Cargando restaurantes'/>
   }
 
 
