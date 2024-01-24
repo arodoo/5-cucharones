@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import { useFormik } from 'formik'
 import Toast from 'react-native-toast-message'
 import { useNavigation } from '@react-navigation/native'
-import  uuid  from 'react-native-uuid';
+import uuid from 'react-native-uuid';
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../../utils/firebase'
 import { initialValues, validationSchema } from './AddRestaurantScreen.data'
@@ -53,7 +53,6 @@ export function AddRestaurantScreen() {
 
       }
       catch (error) {
-        console.log(error)
         Toast.show({
           text1: 'Error',
           text2: 'Ha ocurrido un error al crear el restaurante',

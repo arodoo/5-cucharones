@@ -37,7 +37,6 @@ export function RegisterForm() {
           position: 'bottom',
           text1: 'Error al registrar el usuario',
         })
-        console.log(error)
       }
     }
   })

@@ -43,7 +43,6 @@ export function ChanguePersonalPasswordForm(props) {
                     text1: "Contraseña actualizada"
                 })
             } catch (error) {
-                console.log("Error al actualizar contraseña", error)
                 Toast.show({
                     type: "error",
                     text1: "Error al actualizar contraseña",

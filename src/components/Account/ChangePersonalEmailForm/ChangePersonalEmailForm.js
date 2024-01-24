@@ -37,7 +37,6 @@ export function ChangePersonalEmailForm(props) {
           text1: "Email actualizado",
         })
       } catch (error) {
-        console.log(error)
         Toast.show({
           type: "error",
           position: "bottom",
