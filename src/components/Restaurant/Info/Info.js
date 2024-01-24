@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Text, ListItem, Icon } from 'react-native-elements'
-import { map } from 'lodash'
-
+import { map } from 'lodash';
+import { Map } from '../../Shared';
 import { styles } from './Info.styles'
 
 export function Info(props) {
@@ -32,6 +32,7 @@ export function Info(props) {
     return (
         <View style={styles.content}>
             <Text style={styles.title}>Información sobre el restaurante</Text>
+            <Map location={restaurant.location} name={restaurant.name} />
             <View>
                 {
                     map(listInfo, (item, index) => (

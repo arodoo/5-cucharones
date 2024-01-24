@@ -8,7 +8,7 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore'
-import { Carousel, Loading } from '../../../components/Shared'
+import { Carousel, Loading, Map } from '../../../components/Shared'
 import { Header, Info } from '../../../components/Restaurant'
 import { db } from '../../../utils'
 import { styles } from './RestaurantScreen.styles'
