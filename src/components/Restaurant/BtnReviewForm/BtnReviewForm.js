@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
-import {screen} from '../../../utils'
+import {screen, colors} from '../../../utils'
+
 import { styles } from './BtnReviewForm.styles'
 
 export function BtnReviewForm(props) {
@@ -26,14 +27,24 @@ export function BtnReviewForm(props) {
                 { screen: screen.account.login });
         }
 
+        const goToAddReview = () => {
+            navigation.navigate(screen.restaurant.addReviewRestaurant, 
+                { idRestaurant });
+        }
+
     return (
         <View style={styles.View}>
             {hasLogged ? (
                 <Button
                     title="Escribe una opinión"
+                    icon={{
+                        type: 'material',
+                        name: 'rate-review',
+                        color: colors.firstColor,
+                    }}
                     buttonStyle={styles.button}
-                    titleStyle={styles.text}
-                    onPress={() => console.log('Escribe una opinión')}
+                    titleStyle={styles.btnText}
+                    onPress={() => goToAddReview()}
                 />
             ) : (
                 <Text

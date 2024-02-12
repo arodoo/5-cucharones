@@ -32,6 +32,7 @@ export function RestaurantScreen(props) {
   if (!restaurant) {
     return <Loading show text='Cargando restaurantes' />
   }
+  
 
 
   return (

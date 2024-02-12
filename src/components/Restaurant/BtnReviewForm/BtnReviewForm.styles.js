@@ -8,10 +8,15 @@ export const styles = StyleSheet.create({
         margin: 10,
     },
     button: {
-        backgroundColor: colors.thirdColor,
+        backgroundColor: 'transparent', // 'rgba(206, 206, 206, 0.5)',
         padding: 10,
         borderRadius: 5,
         marginTop: 10,
+    },
+    btnText: {
+        color: colors.firstColor,
+        fontSize: 18,
+        textAlign: "center",
     },
     text: {
         color: "black",
