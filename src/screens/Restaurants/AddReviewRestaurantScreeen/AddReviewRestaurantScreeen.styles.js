@@ -8,9 +8,8 @@ export const styles = StyleSheet.create({
     },
     input: {
         marginBottom: 10,
-        marginTop: 60,
+        marginTop: 30,
     },
-
     comment: {
         height: 100,
         padding: 0,
@@ -19,14 +18,14 @@ export const styles = StyleSheet.create({
     ratingContent: {
         height: 40,
         justifyContent: "center",
-        marginTop: 50,
+        marginTop: 30,
     },
     imgContent: {
         alignItems: "center",
-        marginVertical: 20,
+        marginVertical: 10,
     },
     btnContainer: {
-        marginTop: 80,
+        marginTop: 50,
         width: "95%",
         alignSelf: "center",
     },
