@@ -20,7 +20,6 @@ export function AddRestaurantScreen() {
 
   const handleSubmit = () => {
     formik.handleSubmit()
-    
     if (formik.errors.location) {
       Toast.show({
         text1: 'Ubicación',
