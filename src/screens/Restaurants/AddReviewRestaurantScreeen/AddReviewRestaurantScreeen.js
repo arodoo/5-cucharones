@@ -1,25 +1,66 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native'
-import { Loading } from '../../../components/Shared';
 import { Input, AirbnbRating, Button, Image } from 'react-native-elements';
 import { useFormik } from 'formik';
+import Toast from 'react-native-toast-message';
+import uuid from 'react-native-uuid';
+import { Loading } from '../../../components/Shared';
 import { initialValues, validationSchema } from './AddReviewRestaurantScreeen.data';
 import {
   doc,
   onSnapshot,
+  setDoc,
+  collection,
+  query,
+  where,
+  updateDoc,
 } from 'firebase/firestore'
 import { db } from '../../../utils'
+import { getAuth } from 'firebase/auth';
 import { styles } from './AddReviewRestaurantScreeen.styles';
 
 export function AddReviewRestaurantScreeen(props) {
   const { route } = props;
   const [restaurant, setRestaurant] = useState(null)
+  const navigation = useNavigation()
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const user = getAuth();
+        const newData = {
+          idDoc: uuid.v4(),
+          idUser: user.currentUser.uid,
+          avatar: user.currentUser.photoURL,
+          idRestaurant: route.params.idRestaurant,
+          title: values.title,
+          comment: values.comment,
+          rating: values.rating,
+          createdAt: new Date(),
+        }
+        await setDoc(doc(db, 'reviews', newData.idDoc), newData).finally(() => {
+          Toast.show({
+            text1: 'Comentario enviado',
+            text2: 'El comentario se ha enviado correctamente',
+            type: 'success',
+            position: 'bottom',
+          })
+          navigation.goBack()
+        }
+        )
+
+      } catch (error) {
+        Toast.show({
+          text1: 'Error',
+          text2: 'Ha ocurrido un error al enviar el comentario',
+          type: 'error',
+          position: 'bottom',
+        })
+      }
     },
   });
 
@@ -39,6 +80,8 @@ export function AddReviewRestaurantScreeen(props) {
   const getRestaurantImage = () => {
     return restaurant.images[0];
   }
+
+
 
 
 
