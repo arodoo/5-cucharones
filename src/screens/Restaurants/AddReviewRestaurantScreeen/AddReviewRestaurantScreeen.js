@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { View } from 'react-native'
 import { Loading } from '../../../components/Shared';
 import { Input, AirbnbRating, Button, Image } from 'react-native-elements';
+import { useFormik } from 'formik';
+import { initialValues, validationSchema } from './AddReviewRestaurantScreeen.data';
 import {
   doc,
   onSnapshot,
@@ -13,6 +15,13 @@ import { styles } from './AddReviewRestaurantScreeen.styles';
 export function AddReviewRestaurantScreeen(props) {
   const { route } = props;
   const [restaurant, setRestaurant] = useState(null)
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   useEffect(() => {
     setRestaurant(null);
@@ -31,16 +40,22 @@ export function AddReviewRestaurantScreeen(props) {
     return restaurant.images[0];
   }
 
+
+
   return (
     <View>
       <View style={styles.content}>
         <View>
           <Input
             placeholder="Titulo"
+            onChangeText={(text) => formik.setFieldValue('title', text)}
+            errorMessage={formik.errors.title}
             containerStyle={styles.input}
           />
           <Input
             placeholder="Comentario..."
+            onChangeText={(text) => formik.setFieldValue('comment', text)}
+            errorMessage={formik.errors.comment}
             multiline
             inputContainerStyle={styles.comment}
           />
@@ -55,15 +70,17 @@ export function AddReviewRestaurantScreeen(props) {
           <AirbnbRating
             count={5}
             reviews={["Malo", "Regular", "Normal", "Muy Bueno", "Excelente"]}
-            defaultRating={5}
+            defaultRating={formik.values.rating}
             size={35}
-            onFinishRating={(value) => console.log(value)}
+            onFinishRating={(value) => formik.setFieldValue('rating', value)}
           />
         </View>
       </View>
       <View style={styles.btnContainer}>
         <Button
           title="Enviar Comentario"
+          onPress={formik.handleSubmit}
+          loading={formik.isSubmitting}
           buttonStyle={styles.btn}
         />
       </View>
