@@ -11,6 +11,8 @@ import {
 import { Carousel, Loading, Map } from '../../../components/Shared'
 import { Header, Info, BtnReviewForm } from '../../../components/Restaurant'
 import { db } from '../../../utils'
+import { Reviews } from '../../../components/Restaurant'
+import { BtnFavorite } from '../../../components/Restaurant'
 import { styles } from './RestaurantScreen.styles'
 
 
@@ -42,6 +44,8 @@ export function RestaurantScreen(props) {
         <Header restaurant={restaurant} />
         <Info restaurant={restaurant} />
         <BtnReviewForm idRestaurant={restaurant.id} />
+        <Reviews idRestaurant={route.params.id} />
+        {/* <BtnFavorite idRestaurant={route.params.id} /> */}
       </View>
     </ScrollView >
   )
