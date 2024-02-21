@@ -1,9 +1,11 @@
-import React, {useState, useEffect}  from 'react'
+import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
-import {screen, colors} from '../../../utils'
+import { size } from 'lodash'
+import { query, collection, where, onSnapshot } from 'firebase/firestore'
+import { screen, colors, db } from '../../../utils'
 
 import { styles } from './BtnReviewForm.styles'
 
@@ -12,6 +14,7 @@ export function BtnReviewForm(props) {
     const { idRestaurant } = props;
     const auth = getAuth();
     const [hasLogged, setHasLogged] = useState(false);
+    const [hasReview, setHasReview] = useState(false);
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -22,15 +25,38 @@ export function BtnReviewForm(props) {
     }
         , []);
 
-        const goToLogin = () => {
-            navigation.navigate(screen.account.tab, 
-                { screen: screen.account.login });
+    useEffect(() => {
+        if (hasLogged) {
+            const q = query
+                (collection(db, 'reviews'),
+                    where('idRestaurant', '==', idRestaurant),
+                    where('idUser', '==', auth.currentUser.uid)
+                );
+            onSnapshot(q, (snapshot) => {
+                setHasReview(size(snapshot.docs) > 0 ? true : false);
+            });
         }
+    }, [hasLogged]);
 
-        const goToAddReview = () => {
-            navigation.navigate(screen.restaurant.addReviewRestaurant, 
-                { idRestaurant });
-        }
+    const goToLogin = () => {
+        navigation.navigate(screen.account.tab,
+            { screen: screen.account.login });
+    }
+
+    const goToAddReview = () => {
+        navigation.navigate(screen.restaurant.addReviewRestaurant,
+            { idRestaurant });
+    }
+
+    if (hasReview) {
+        return (
+            <View style={styles.View}>
+                <Text style={styles.textAddedReview}>
+                    ¡Ya has calificado este restaurante! :D
+                </Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.View}>

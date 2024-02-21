@@ -23,4 +23,10 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
     },
+
+    textAddedReview: {
+        color: colors.firstColor,
+        fontSize: 18,
+        textAlign: "center",
+    }
     });
