@@ -35,15 +35,14 @@ export function BtnFavorite(props) {
     return response.docs;
   }
 
-  const removeFavorite = async (idFavorite) => {
-    try {
-      await deleteDoc(doc(db, 'favorites', idFavorite));
-      setIsFavorite(false).then(() => {
+  const removeFavorite = async () => {
+    const response = await getFavorites()
+    response.forEach(async (doc) => {
+      await deleteDoc(doc.ref).then(() => {
+        setIsFavorite(false)
         onReload()
-      });
-    } catch (error) {
-      console.log(error)
-    }
+      })
+    })
   }
 
 
@@ -70,7 +69,7 @@ export function BtnFavorite(props) {
         color={isFavorite ? '#f00' : '#DCDCDC'}
         size={40}
 
-        onPress={() => isFavorite ? removeFavorite() : addFavorite()}
+        onPress={isFavorite ? removeFavorite : addFavorite}
       />
     </View>
   )
