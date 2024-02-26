@@ -3,16 +3,11 @@ import { ScrollView, Dimensions, View } from 'react-native'
 import {
   doc,
   onSnapshot,
-  collection,
-  query,
-  where,
-  orderBy,
 } from 'firebase/firestore'
 import { Carousel, Loading, Map } from '../../../components/Shared'
 import { Header, Info, BtnReviewForm } from '../../../components/Restaurant'
 import { db } from '../../../utils'
-import { Reviews } from '../../../components/Restaurant'
-import { BtnFavorite } from '../../../components/Restaurant'
+import { Reviews, BtnFavorite } from '../../../components/Restaurant'
 import { styles } from './RestaurantScreen.styles'
 
 
@@ -45,7 +40,7 @@ export function RestaurantScreen(props) {
         <Info restaurant={restaurant} />
         <BtnReviewForm idRestaurant={restaurant.id} />
         <Reviews idRestaurant={route.params.id} />
-        {/* <BtnFavorite idRestaurant={route.params.id} /> */}
+        { <BtnFavorite idRestaurant={route.params.id} />}
       </View>
     </ScrollView >
   )

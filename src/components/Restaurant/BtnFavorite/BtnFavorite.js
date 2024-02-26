@@ -1,10 +1,24 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View} from 'react-native'
+import { Icon} from 'react-native-elements';
+import { styles } from './BtnFavorite.styles'
 
-export function BtnFavorite() {
+export function BtnFavorite(props) {
+  const { idRestaurant } = props;
+
+  const addFavorite = () => {
+    console.log('Añadir a favoritos')
+  }
   return (
-    <View>
-      <Text>BtnFavorite</Text>
+    <View style = {styles.content}>
+      <Icon
+        type='material'
+        name='favorite'
+        color='#DCDCDC'
+        size={40}
+        
+        onPress={() => addFavorite()}
+      />
     </View>
   )
 }
