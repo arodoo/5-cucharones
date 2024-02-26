@@ -11,6 +11,7 @@ import { styles } from './BtnFavorite.styles'
 export function BtnFavorite(props) {
   const { idRestaurant } = props
   const [isFavorite, setIsFavorite] = useState(false)
+  const [isReload, setIsReload] = useState(false)
   const auth = getAuth()
 
   useEffect(() => {
@@ -20,8 +21,11 @@ export function BtnFavorite(props) {
         setIsFavorite(true)
       }
     })()
-  }, [])
+  }, [idRestaurant, isReload])
 
+  const onReload = () => {
+    setIsReload(!isReload)
+  }
 
   const getFavorites = async () => {
     const q = query(collection(db, 'favorites'),
@@ -34,7 +38,9 @@ export function BtnFavorite(props) {
   const removeFavorite = async (idFavorite) => {
     try {
       await deleteDoc(doc(db, 'favorites', idFavorite));
-      setIsFavorite(false)
+      setIsFavorite(false).then(() => {
+        onReload()
+      });
     } catch (error) {
       console.log(error)
     }
@@ -49,7 +55,9 @@ export function BtnFavorite(props) {
         idRestaurant: idRestaurant,
         idUser: auth.currentUser.uid
       }
-      await setDoc(doc(db, 'favorites', idFavorite), data);
+      await setDoc(doc(db, 'favorites', idFavorite), data).then(() => {
+        onReload()
+      });
     } catch (error) {
 
     }
@@ -58,11 +66,11 @@ export function BtnFavorite(props) {
     <View style={styles.content}>
       <Icon
         type='material'
-        name= {isFavorite ? 'favorite' : 'favorite-border'}
+        name={isFavorite ? 'favorite' : 'favorite-border'}
         color={isFavorite ? '#f00' : '#DCDCDC'}
         size={40}
 
-        onPress= {() => isFavorite ? removeFavorite() : addFavorite()}
+        onPress={() => isFavorite ? removeFavorite() : addFavorite()}
       />
     </View>
   )
