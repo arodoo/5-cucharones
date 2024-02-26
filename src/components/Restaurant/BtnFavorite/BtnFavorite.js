@@ -1,15 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { getAuth } from 'firebase/auth'
-import { doc, setDoc, getDoc, query, where, collection, deleteDoc } from 'firebase/firestore'
+import { doc, setDoc, getDocs, query, where, collection, deleteDoc } from 'firebase/firestore'
 import uuid from 'react-native-uuid'
+import { size } from 'lodash'
 import { db } from '../../../utils'
 import { styles } from './BtnFavorite.styles'
 
 export function BtnFavorite(props) {
   const { idRestaurant } = props
+  const [isFavorite, setIsFavorite] = useState(false)
   const auth = getAuth()
+
+  useEffect(() => {
+    (async () => {
+      const response = await getFavorites()
+      if (size(response) > 0) {
+        setIsFavorite(true)
+      }
+    })()
+  }, [])
+
+
+  const getFavorites = async () => {
+    const q = query(collection(db, 'favorites'),
+      where('idRestaurant', '==', idRestaurant),
+      where('idUser', '==', auth.currentUser.uid));
+    const response = await getDocs(q);
+    return response.docs;
+  }
+
+  const removeFavorite = async (idFavorite) => {
+    try {
+      await deleteDoc(doc(db, 'favorites', idFavorite));
+      setIsFavorite(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const addFavorite = async () => {
     try {
@@ -21,18 +51,18 @@ export function BtnFavorite(props) {
       }
       await setDoc(doc(db, 'favorites', idFavorite), data);
     } catch (error) {
-      
+
     }
   }
   return (
     <View style={styles.content}>
       <Icon
         type='material'
-        name='favorite'
-        color='#DCDCDC'
+        name= {isFavorite ? 'favorite' : 'favorite-border'}
+        color={isFavorite ? '#f00' : '#DCDCDC'}
         size={40}
 
-        onPress={() => addFavorite()}
+        onPress= {() => isFavorite ? removeFavorite() : addFavorite()}
       />
     </View>
   )
