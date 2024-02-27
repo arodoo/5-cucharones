@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc, getDoc, query, where, collection, deleteDoc, onSnapshot } from 'firebase/firestore'
 import { db } from "../utils";
-import { UserNotLogged } from "../components/Favorites";
+import { Loading } from "../components/Shared";
+import { size } from "lodash";
+import { UserNotLogged, NotFoundRestaurants } from "../components/Favorites";
 
 
 export function FavoritesScreen() {
     const [hasLogged, setHasLogged] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [favorites, setFavorites] = useState([])
     const auth = getAuth()
-    console.log(favorites);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -27,27 +29,33 @@ export function FavoritesScreen() {
         );
         onSnapshot(q, async (snapshot) => {
             let favoritesArray = [];
-            snapshot.forEach(async (item) => {
+            for await (const item of snapshot.docs) {
                 const data = item.data();
                 const docRef = doc(db, 'restaurants', data.idRestaurant);
                 const response = await getDoc(docRef);
                 const newData = response.data();
                 newData.id = data.id;
                 favoritesArray.push(newData);
-            });
+            }
+            setLoading(false);
             setFavorites(favoritesArray);
         }
         )
     }
-        , [hasLogged])
+        , [])
 
 
+
+
+    if (loading) return (<Loading show text='Cargando' />)
+
+    if (size(favorites) === 0) return (<NotFoundRestaurants />)
 
     if (!hasLogged) return (<UserNotLogged />)
 
     return (
         <View >
-            <Text>Favorites</Text>
+            <Text>textttt </Text>
         </View>
     );
 }
