@@ -26,17 +26,23 @@ export function BtnReviewForm(props) {
         , []);
 
     useEffect(() => {
-        if (hasLogged) {
-            const q = query
-                (collection(db, 'reviews'),
-                    where('idRestaurant', '==', idRestaurant),
-                    where('idUser', '==', auth.currentUser.uid)
-                );
-            onSnapshot(q, (snapshot) => {
-                setHasReview(size(snapshot.docs) > 0 ? true : false);
+        if (hasLogged && auth.currentUser) {
+            const q = query(
+                collection(db, 'reviews'),
+                where('idRestaurant', '==', idRestaurant),
+                where('idUser', '==', auth.currentUser.uid)
+            );
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                setHasReview(size(snapshot.docs) > 0);
             });
+
+            // Función de limpieza para reiniciar el estado
+            return () => {
+                unsubscribe();
+                setHasReview(false);
+            };
         }
-    }, [hasLogged]);
+    }, [hasLogged, idRestaurant]);
 
     const goToLogin = () => {
         navigation.navigate(screen.account.tab,

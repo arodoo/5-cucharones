@@ -34,7 +34,7 @@ export function FavoritesScreen() {
                 const docRef = doc(db, 'restaurants', data.idRestaurant);
                 const response = await getDoc(docRef);
                 const newData = response.data();
-                newData.id = data.id;
+                newData.id = data.idRestaurant;
                 favoritesArray.push(newData);
             }
             setLoading(false);
@@ -54,7 +54,7 @@ export function FavoritesScreen() {
     if (!hasLogged) return (<UserNotLogged />)
 
     return (
-        <ScrollView >
+        <ScrollView key={new Date().getTime()}>
             {map(favorites, (restaurant) => (
                 <RestaurantFavorites
                     key={restaurant.id}

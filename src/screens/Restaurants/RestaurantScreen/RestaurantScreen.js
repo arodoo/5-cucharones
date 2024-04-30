@@ -18,19 +18,26 @@ export function RestaurantScreen(props) {
   const { width } = Dimensions.get('window')
 
   useEffect(() => {
-    
-    onSnapshot(doc(db, 'restaurants', route.params.id), (doc) => {
-      setRestaurant(doc.data())
-      console.log('restaurant', doc.data())
-    }
-    )
+    //console.log('props', props);
 
-  }
-    , [route.params.id])
+    const unsubscribe = onSnapshot(doc(db, 'restaurants', route.params.id), (doc) => {
+      if (doc.exists) {
+        setRestaurant(doc.data());
+      } else {
+        console.log('No such document!');
+      }
+    });
+
+    // Desuscribirse del listener cuando el componente se desmonte
+    return () => unsubscribe();
+  }, [route.params.id]);
 
   if (!restaurant) {
-    return <Loading show text='Cargando restaurante' />
+    return <Loading show text='Cargando restaurante' />;
   }
+
+
+
   
 
 

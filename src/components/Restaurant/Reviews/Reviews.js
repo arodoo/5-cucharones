@@ -15,6 +15,7 @@ import { db } from "../../../utils";
 import { styles } from "./Reviews.styles";
 import "intl";
 import "intl/locale-data/jsonp/es";
+import { set } from "firebase/database";
 
 export function Reviews(props) {
     const { idRestaurant } = props;
@@ -27,10 +28,16 @@ export function Reviews(props) {
             orderBy("createdAt", "desc")
         );
 
-        onSnapshot(q, (snapshot) => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
             setReviews(snapshot.docs);
         });
-    }, []);
+
+        // Corrección aquí: función de flecha para la función de limpieza
+        return () => {
+            unsubscribe();
+            setReviews(null);
+        };
+    }, [idRestaurant]);
 
     if (!reviews) return <Loading show text="Cargando" />;
 

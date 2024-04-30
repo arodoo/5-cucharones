@@ -11,11 +11,10 @@ export function RestaurantFavorites(props) {
     const navigation = useNavigation()
 
     const goToRestaurant = () => {
-        console.log('go to restaurant', restaurant.id)
-/*         navigation.navigate('RestaurantsTab', {
+        navigation.navigate('RestaurantsTab', {
             screen: 'Restaurant',
-            params: { id: id }  
-        }) */
+            params: { id: restaurant.id }  
+        })  
     }
 
     const onRemoveFavorite = () => {
