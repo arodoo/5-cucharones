@@ -35,6 +35,7 @@ export function FavoritesScreen() {
                 const response = await getDoc(docRef);
                 const newData = response.data();
                 newData.id = data.idRestaurant;
+                newData.idFavorite = item.id;
                 favoritesArray.push(newData);
             }
             setLoading(false);

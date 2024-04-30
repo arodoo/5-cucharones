@@ -2,7 +2,8 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Icon, Image, Text } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
-import {screen} from '../../../utils'
+import { deleteDoc, doc } from 'firebase/firestore'
+import { db } from '../../../utils'
 import { styles } from './RestaurantFavoritesstyles'
 
 export function RestaurantFavorites(props) {
@@ -13,12 +14,16 @@ export function RestaurantFavorites(props) {
     const goToRestaurant = () => {
         navigation.navigate('RestaurantsTab', {
             screen: 'Restaurant',
-            params: { id: restaurant.id }  
-        })  
+            params: { id: restaurant.id }
+        })
     }
 
-    const onRemoveFavorite = () => {
-        console.log('remove favorite')
+    const onRemoveFavorite = async () => {
+        try {
+            await deleteDoc(doc(db, 'favorites', restaurant.idFavorite));
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

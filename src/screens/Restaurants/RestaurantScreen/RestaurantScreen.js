@@ -18,8 +18,6 @@ export function RestaurantScreen(props) {
   const { width } = Dimensions.get('window')
 
   useEffect(() => {
-    //console.log('props', props);
-
     const unsubscribe = onSnapshot(doc(db, 'restaurants', route.params.id), (doc) => {
       if (doc.exists) {
         setRestaurant(doc.data());
