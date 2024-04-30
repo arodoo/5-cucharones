@@ -356,13 +356,9 @@ index 7149c64..78b361c 100644
 -  },
 -  get ViewPropTypes(): $FlowFixMe {
 -    console.error(
--      'ViewPropTypes will be removed from React Native, along with all ' +
--        'other PropTypes. We recommend that you migrate away from PropTypes ' +
--        'and switch to a type system like TypeScript. If you need to ' +
--        'continue using ViewPropTypes, migrate to the ' +
--        "'deprecated-react-native-prop-types' package.",
+-      'ViewPropTypes will be removed from React Native'
 -    );
--    return require('deprecated-react-native-prop-types').ViewPropTypes;
+-    return('hi');
    },
 +    // Deprecated Prop Types
 +    get ColorPropType(): $FlowFixMe {

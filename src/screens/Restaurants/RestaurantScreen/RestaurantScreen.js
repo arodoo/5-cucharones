@@ -18,16 +18,18 @@ export function RestaurantScreen(props) {
   const { width } = Dimensions.get('window')
 
   useEffect(() => {
-    setRestaurant(null);
+    
     onSnapshot(doc(db, 'restaurants', route.params.id), (doc) => {
       setRestaurant(doc.data())
+      console.log('restaurant', doc.data())
     }
     )
+
   }
     , [route.params.id])
 
   if (!restaurant) {
-    return <Loading show text='Cargando restaurantes' />
+    return <Loading show text='Cargando restaurante' />
   }
   
 

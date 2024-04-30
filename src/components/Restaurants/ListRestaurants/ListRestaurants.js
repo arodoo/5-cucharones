@@ -10,7 +10,7 @@ export function ListRestaurants(props) {
     const navigation = useNavigation()
 
     const goToRestaurant = (id) => {
-        navigation.navigate(screen.restaurant.restaurant, { id: id })
+        navigation.navigate('Restaurant', { id: id })
     }
   return (
     <FlatList

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { ScrollView, Text, } from "react-native";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc, getDoc, query, where, collection, deleteDoc, onSnapshot } from 'firebase/firestore'
 import { db } from "../utils";
 import { Loading } from "../components/Shared";
-import { size } from "lodash";
-import { UserNotLogged, NotFoundRestaurants } from "../components/Favorites";
+import { size, map } from "lodash";
+import { UserNotLogged, NotFoundRestaurants, RestaurantFavorites } from "../components/Favorites";
 
 
 export function FavoritesScreen() {
@@ -54,9 +54,14 @@ export function FavoritesScreen() {
     if (!hasLogged) return (<UserNotLogged />)
 
     return (
-        <View >
-            <Text>textttt </Text>
-        </View>
+        <ScrollView >
+            {map(favorites, (restaurant) => (
+                <RestaurantFavorites
+                    key={restaurant.id}
+                    restaurant={restaurant}
+                />
+            ))}
+        </ScrollView>
     );
 }
 
