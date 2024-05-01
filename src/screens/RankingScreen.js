@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
-import { size } from 'lodash';
+import { size, map } from 'lodash';
 import { db } from "../utils";
+
+import { RestaurantRanking } from '../components/Restaurants/RestaurantRanking';
 
 
 export function RankingScreen() {
@@ -25,14 +27,18 @@ export function RankingScreen() {
                 restaurantsArray.push(data);
             });
             setRestaurants(restaurantsArray);
-
         });
     }
-    , []);
+        , []);
 
     return (
-        <View >
-            <Text>Ranking</Text>
-        </View>
+        <ScrollView >
+            {map(restaurants, (restaurant, index) => (
+                <RestaurantRanking
+                    key={index}
+                    restaurant={restaurant}
+                    index={index} />
+            ))}
+        </ScrollView>
     );
 }
