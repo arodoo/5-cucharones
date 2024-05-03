@@ -1,10 +1,16 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Image, Text, Rating, Icon } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native'
 import { styles } from './RestaurantRanking.styles'
 
 export function RestaurantRanking(props) {
-  const { restaurant, index } = props
+  const { restaurant, index } = props;
+  const navigation = useNavigation();
+
+  const goToRestaurant = () => {
+    navigation.navigate('RestaurantsTab', { screen: 'Restaurant', params: { id: restaurant.id } });
+  }
 
   const renderIcon = () => {
     if (index === 0) {
@@ -19,7 +25,7 @@ export function RestaurantRanking(props) {
   }
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={goToRestaurant}>
       <View style={styles.content}>
         <Image
           resizeMode="cover"
