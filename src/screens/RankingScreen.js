@@ -10,7 +10,7 @@ import { RestaurantRanking } from '../components/Restaurants/RestaurantRanking';
 export function RankingScreen() {
 
     const [restaurants, setRestaurants] = useState([]);
-    console.log(size(restaurants));
+    //console.log(size(restaurants));
 
     useEffect(() => {
         const q = query(

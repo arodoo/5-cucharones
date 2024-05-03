@@ -5,6 +5,19 @@ import { styles } from './RestaurantRanking.styles'
 
 export function RestaurantRanking(props) {
   const { restaurant, index } = props
+
+  const renderIcon = () => {
+    if (index === 0) {
+      return <Icon type="material-community" name="trophy" color="#FFD700" style={styles.medal} />
+    }
+    if (index === 1) {
+      return <Icon type="material-community" name="trophy" color="#C0C0C0" style={styles.medal} />
+    }
+    if (index === 2) {
+      return <Icon type="material-community" name="trophy" color="#cd7f32" style={styles.medal} />
+    }
+  }
+
   return (
     <TouchableOpacity>
       <View style={styles.content}>
@@ -15,7 +28,10 @@ export function RestaurantRanking(props) {
           style={styles.image}
         />
         <View style={styles.titleRanking}>
-          <Text style={styles.title}>{restaurant.name}</Text>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
+            {renderIcon()}
+            <Text style={styles.title}>{restaurant.name}</Text>
+          </View>
           <Rating imageSize={20} startingValue={restaurant.rating} readonly style={styles.rating} />
         </View>
         <Text style={styles.description}>{restaurant.description}</Text>

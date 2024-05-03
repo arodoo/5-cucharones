@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     content: {
         flexDirection: 'column',
-        flex: 1,
         marginVertical: 10,
         marginHorizontal: 15,
         backgroundColor: '#fff',
@@ -27,7 +26,7 @@ export const styles = StyleSheet.create({
 
     titleRanking: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
         marginTop: 10,
         marginHorizontal: 10,
 
@@ -40,13 +39,16 @@ export const styles = StyleSheet.create({
 
     rating: {
         marginTop: 10,
-
     },
 
     description: {
         color: 'grey',
         marginTop: 10,
         marginHorizontal: 15,
+    },
+
+    medal: {
+        marginRight: 10,
     },
 
 });
